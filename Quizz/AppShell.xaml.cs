@@ -1,4 +1,4 @@
-﻿namespace Quizz
+﻿ namespace Quizz
 {
     public partial class AppShell : Shell
     {
