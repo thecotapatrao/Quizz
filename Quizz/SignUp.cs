@@ -1,15 +1,14 @@
-namespace Quizz;
+using Microsoft.Maui.Controls;
 
-public class SignUp : ContentPage
+namespace Quizz
 {
-	public SignUp()
-	{
-		Content = new VerticalStackLayout
-		{
-			Children = {
-				new Label { HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.Center, Text = "Welcome to .NET MAUI!"
-				}
-			}
-		};
-	}
+    public partial class SignUp : ContentPage
+    {
+        public SignUp()
+        {
+            InitializeComponent();
+        }
+
+
+    }
 }

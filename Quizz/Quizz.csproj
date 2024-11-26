@@ -83,6 +83,7 @@
 	  <None Remove="Resources\Fonts\Poppins-SemiBoldItalic.ttf" />
 	  <None Remove="Resources\Fonts\Poppins-Thin.ttf" />
 	  <None Remove="Resources\Fonts\Poppins-ThinItalic.ttf" />
+	  <None Remove="Resources\Images\back_arrow.png" />
 	  <None Remove="Resources\Images\circle-user.png" />
 	  <None Remove="Resources\Images\eye.png" />
 	  <None Remove="Resources\Images\eye_crossed.png" />

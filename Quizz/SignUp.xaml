@@ -2,107 +2,145 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Quizz.SignUp"
-             Title="">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#dee2e6">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <Grid RowDefinitions="Auto, 0.1*, *" ColumnDefinitions="Auto,*">
+        <!-- Back Arrow in the first column of Row 0 -->
+        <StackLayout Orientation="Horizontal" Padding="30,40" Grid.Row="0"
+                     Grid.Column="0" 
+                     BackgroundColor="#80b9b9">
+            <Image
+                Source="back_arrow.png"
+                HeightRequest="24"
+                WidthRequest="24"
+                VerticalOptions="Center"
+                HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackToLoginTapped" />
+                </Image.GestureRecognizers>
+            </Image>
+        </StackLayout>
 
-        <!-- Title -->
-        <Label 
-            Text="CREATE YOUR ACCOUNT"
-            FontFamily="PoppinsBold"
-            FontSize="24"
-            VerticalOptions="Start"
-            HorizontalOptions="Center"
-            TextColor="Black" />
+        <!-- SignUp Label in the second column of Row 0 -->
+        <StackLayout Padding="30,40,120,20"
+                     Grid.Row="0"
+                     Grid.Column="1"
+                     BackgroundColor="#80b9b9">
+            <Label 
+                Text="SIGN UP"
+                FontFamily="PoppinsBold"
+                FontSize="24"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                TextColor="White" />
+        </StackLayout>
 
-        <!-- Username Entry -->
-        <Frame CornerRadius="20" BackgroundColor="#dee2e6" Padding="4">
-            <Entry
-                Placeholder="Username"
-                FontFamily="PoppinsRegular"
-                FontSize="14"
-                HeightRequest="40"
-                TextColor="Black"
-                BackgroundColor="Transparent"
-                PlaceholderColor="Gray" />
-        </Frame>
+        <!-- Bottom Gray Section (remaining space) -->
+        <ScrollView Grid.Row="2" Grid.ColumnSpan="2">
+            <VerticalStackLayout Padding="20,0,20,15" Spacing="15">
+                <!-- Email Entry -->
+                <Frame CornerRadius="20" BackgroundColor="White" Padding="4">
+                    <Entry
+                        Placeholder="Email"
+                        FontFamily="PoppinsRegular"
+                        FontSize="14"
+                        HeightRequest="40"
+                        TextColor="Black"
+                        BackgroundColor="Transparent"
+                        PlaceholderColor="Gray" />
+                </Frame>
 
-        <!-- Email Entry -->
-        <Frame CornerRadius="20" BackgroundColor="#dee2e6" Padding="4">
-            <Entry
-                Placeholder="Email"
-                FontFamily="PoppinsRegular"
-                FontSize="14"
-                HeightRequest="40"
-                TextColor="Black"
-                BackgroundColor="Transparent"
-                PlaceholderColor="Gray" />
-        </Frame>
+                <!-- Full Name Entry -->
+                <Frame CornerRadius="20" BackgroundColor="White" Padding="4">
+                    <Entry
+                        Placeholder="Full name"
+                        FontFamily="PoppinsRegular"
+                        FontSize="14"
+                        HeightRequest="40"
+                        TextColor="Black"
+                        BackgroundColor="Transparent"
+                        PlaceholderColor="Gray" />
+                </Frame>
 
-        <!-- Password Entry with Eye Icon -->
-        <Frame CornerRadius="20" BackgroundColor="#dee2e6" Padding="4">
-            <Grid>
-                <Entry
-                    x:Name="PasswordEntry"
-                    Placeholder="Password"
-                    FontFamily="PoppinsRegular"
-                    FontSize="14"
-                    HeightRequest="40"
-                    TextColor="Black"
-                    IsPassword="True"
-                    BackgroundColor="Transparent"
-                    PlaceholderColor="Gray" />
-                <Image 
-                    x:Name="PasswordEyeIcon"
-                    Source="eye_closed.png" 
-                    HeightRequest="20" 
-                    WidthRequest="60" 
-                    VerticalOptions="Center" 
-                    HorizontalOptions="End">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding TogglePasswordVisibilityCommand}" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </Grid>
-        </Frame>
+                <!-- Username Entry -->
+                <Frame CornerRadius="20" BackgroundColor="White" Padding="4">
+                    <Entry
+                        Placeholder="Username"
+                        FontFamily="PoppinsRegular"
+                        FontSize="14"
+                        HeightRequest="40"
+                        TextColor="Black"
+                        BackgroundColor="Transparent"
+                        PlaceholderColor="Gray" />
+                </Frame>
 
-        <!-- Confirm Password Entry with Eye Icon -->
-        <Frame CornerRadius="20" BackgroundColor="#dee2e6" Padding="4">
-            <Grid>
-                <Entry
-                    x:Name="ConfirmPasswordEntry"
-                    Placeholder="Confirm Password"
-                    FontFamily="PoppinsRegular"
-                    FontSize="14"
-                    HeightRequest="40"
-                    TextColor="Black"
-                    IsPassword="True"
-                    BackgroundColor="Transparent"
-                    PlaceholderColor="Gray" />
-                <Image 
-                    x:Name="ConfirmPasswordEyeIcon"
-                    Source="eye_closed.png" 
-                    HeightRequest="20" 
-                    WidthRequest="60" 
-                    VerticalOptions="Center" 
-                    HorizontalOptions="End">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ToggleConfirmPasswordVisibilityCommand}" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </Grid>
-        </Frame>
+                <!-- Password Entry with Eye Icon -->
+                <Frame CornerRadius="20" BackgroundColor="White" Padding="4">
+                    <Grid>
+                        <Entry
+                            x:Name="PasswordEntry"
+                            Placeholder="Password"
+                            FontFamily="PoppinsRegular"
+                            FontSize="14"
+                            HeightRequest="40"
+                            TextColor="Black"
+                            IsPassword="True"
+                            BackgroundColor="Transparent"
+                            PlaceholderColor="Gray" />
+                        <Image 
+                            x:Name="PasswordEyeIcon"
+                            Source="eye_closed.png" 
+                            HeightRequest="20" 
+                            WidthRequest="60" 
+                            VerticalOptions="Center" 
+                            HorizontalOptions="End">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TogglePasswordVisibilityCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </Frame>
 
-        <!-- SignUp Button -->
-        <Button 
-            Text="Sign Up"
-            BackgroundColor="#80b9b9"
-            TextColor="White"
-            FontFamily="PoppinsBold"
-            CornerRadius="25"
-            HeightRequest="45"
-            FontAttributes="Bold"
-            VerticalOptions="End" />
+                <!-- Confirm Password Entry with Eye Icon -->
+                <Frame CornerRadius="20" BackgroundColor="White" Padding="4">
+                    <Grid>
+                        <Entry
+                            x:Name="ConfirmPasswordEntry"
+                            Placeholder="Confirm Password"
+                            FontFamily="PoppinsRegular"
+                            FontSize="14"
+                            HeightRequest="40"
+                            TextColor="Black"
+                            IsPassword="True"
+                            BackgroundColor="Transparent"
+                            PlaceholderColor="Gray" />
+                        <Image 
+                            x:Name="ConfirmPasswordEyeIcon"
+                            Source="eye_closed.png" 
+                            HeightRequest="20" 
+                            WidthRequest="60" 
+                            VerticalOptions="Center" 
+                            HorizontalOptions="End">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleConfirmPasswordVisibilityCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </Frame>
 
-    </VerticalStackLayout>
+                <!-- Sign Up Button -->
+                <Button 
+                    Text="Sign Up"
+                    BackgroundColor="#80b9b9"
+                    TextColor="White"
+                    FontFamily="PoppinsBold"
+                    CornerRadius="25"
+                    Margin="0,15,0,0"
+                    HeightRequest="45"
+                    FontAttributes="Bold"
+                    VerticalOptions="End" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

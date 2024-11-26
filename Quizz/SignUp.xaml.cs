@@ -17,6 +17,10 @@ namespace Quizz
 
             BindingContext = this;
         }
+        private async void OnBackToLoginTapped(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
 
         /// <summary>
         /// Alterna a visibilidade da senha e atualiza o ícone correspondente.
