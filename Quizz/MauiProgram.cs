@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Firebase.Auth;
+using Firebase.Auth.Providers;
+using Microsoft.Extensions.Logging;
 
 namespace Quizz
 {
@@ -51,7 +53,15 @@ namespace Quizz
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-
+            builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig()
+            {
+                ApiKey = "AIzaSyC0F2002TUyh3mkMgLXB5RKuri5aNGSlXA",
+                AuthDomain = "quizz - game - 4c3d5.firebaseapp.com",
+                Providers = new Firebase.Auth.Providers.FirebaseAuthProvider[]
+                {
+                    new EmailProvider()
+                }
+            }));
             return builder.Build();
 
 

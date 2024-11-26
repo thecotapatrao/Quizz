@@ -14,18 +14,17 @@
                        Aspect="AspectFit" />
                 <Label Text="Welcome!"
                        FontFamily="PoppinsRegular"
-                   TextColor="white"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center"
-                   FontSize="40"
-                   Margin="0,0,0,35" />
+                       TextColor="white"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       FontSize="40"
+                       Margin="0,0,0,35" />
             </VerticalStackLayout>
         </Grid>
 
         <!-- Parte inferior -->
         <Grid BackgroundColor="#664675" Grid.Row="1">
             <!-- Adiciona o Label "Welcome" na parte superior -->
-
         </Grid>
 
         <!-- Caixa de login flutuante -->
@@ -41,12 +40,13 @@
             HasShadow="False">
             <VerticalStackLayout Spacing="20">
 
-                <!-- Campo de texto para o username -->
+                <!-- Campo de texto para o email -->
                 <Frame CornerRadius="20" BackgroundColor="#dee2e6" Padding="2">
                     <HorizontalStackLayout>
                         <Image Source="username_icon.png" HeightRequest="20" WidthRequest="20" Margin="10,0" />
                         <Entry
-                            Placeholder="Username"
+                            Placeholder="Email"
+                            Text="{Binding Email}"
                             FontFamily="PoppinsThin"
                             BackgroundColor="Transparent"
                             PlaceholderColor="Black"
@@ -64,6 +64,7 @@
                         <Image Source="password_icon.png" HeightRequest="20" WidthRequest="20" Margin="10,0" />
                         <Entry
                             Placeholder="Password"
+                            Text="{Binding Password}"
                             FontFamily="PoppinsThin"
                             VerticalTextAlignment="Center"
                             IsPassword="True"
@@ -80,46 +81,40 @@
                     Text="Login"
                     BackgroundColor="#80b9b9"
                     TextColor="White"
+                    Command="{Binding LogInCommand}"
                     FontFamily="PoppinsBold"
                     CornerRadius="25"
                     HeightRequest="40"
                     FontAttributes="Bold" />
 
                 <HorizontalStackLayout 
-        VerticalOptions="Center" 
-        HorizontalOptions="Fill"
-        Spacing="10">
-
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Fill"
+                    Spacing="10">
 
                     <Label 
                         FontFamily="PoppinsRegular"
-            Text="Not a member?"
-            TextColor="Grey"
-            VerticalOptions="Center"
-            HorizontalOptions="End"
-            FontSize="15" 
-            Margin="10,0,40,0" />
-
+                        Text="Not a member?"
+                        TextColor="Grey"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End"
+                        FontSize="15" 
+                        Margin="10,0,40,0" />
 
                     <Label 
-            Text="Create an account"
-            TextColor="#007bff" 
-            VerticalOptions="Center" 
-            HorizontalOptions="End"
-            FontSize="15"
-            Margin="0,0,10,0">
+                        Text="Create an account"
+                        TextColor="#007bff" 
+                        VerticalOptions="Center" 
+                        HorizontalOptions="End"
+                        FontSize="15"
+                        Margin="0,0,10,0">
 
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SignUpCommand}" />
+                            <TapGestureRecognizer Command="{Binding GoToSignUpCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
-
                 </HorizontalStackLayout>
             </VerticalStackLayout>
-
-
         </Frame>
-
     </Grid>
-
 </ContentPage>

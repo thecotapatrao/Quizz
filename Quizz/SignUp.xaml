@@ -2,14 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Quizz.SignUp"
+             x:Name="SignUpPage"
              Shell.NavBarIsVisible="False"
              BackgroundColor="#dee2e6">
 
     <Grid RowDefinitions="Auto, 0.1*, *" ColumnDefinitions="Auto,*">
-        <!-- Back Arrow in the first column of Row 0 -->
-        <StackLayout Orientation="Horizontal" Padding="30,40" Grid.Row="0"
-                     Grid.Column="0" 
-                     BackgroundColor="#80b9b9">
+        <!-- Back Arrow -->
+        <StackLayout Orientation="Horizontal" Padding="30,40" Grid.Row="0" Grid.Column="0" BackgroundColor="#80b9b9">
             <Image
                 Source="back_arrow.png"
                 HeightRequest="24"
@@ -22,11 +21,8 @@
             </Image>
         </StackLayout>
 
-        <!-- SignUp Label in the second column of Row 0 -->
-        <StackLayout Padding="30,40,120,20"
-                     Grid.Row="0"
-                     Grid.Column="1"
-                     BackgroundColor="#80b9b9">
+        <!-- Sign Up Label -->
+        <StackLayout Padding="30,40,120,20" Grid.Row="0" Grid.Column="1" BackgroundColor="#80b9b9">
             <Label 
                 Text="SIGN UP"
                 FontFamily="PoppinsBold"
@@ -36,13 +32,14 @@
                 TextColor="White" />
         </StackLayout>
 
-        <!-- Bottom Gray Section (remaining space) -->
+        <!-- Form Section -->
         <ScrollView Grid.Row="2" Grid.ColumnSpan="2">
             <VerticalStackLayout Padding="20,0,20,15" Spacing="15">
                 <!-- Email Entry -->
                 <Frame CornerRadius="20" BackgroundColor="White" Padding="4">
                     <Entry
                         Placeholder="Email"
+                        Text="{Binding Email}"
                         FontFamily="PoppinsRegular"
                         FontSize="14"
                         HeightRequest="40"
@@ -55,18 +52,7 @@
                 <Frame CornerRadius="20" BackgroundColor="White" Padding="4">
                     <Entry
                         Placeholder="Full name"
-                        FontFamily="PoppinsRegular"
-                        FontSize="14"
-                        HeightRequest="40"
-                        TextColor="Black"
-                        BackgroundColor="Transparent"
-                        PlaceholderColor="Gray" />
-                </Frame>
-
-                <!-- Username Entry -->
-                <Frame CornerRadius="20" BackgroundColor="White" Padding="4">
-                    <Entry
-                        Placeholder="Username"
+                        Text="{Binding Username}"
                         FontFamily="PoppinsRegular"
                         FontSize="14"
                         HeightRequest="40"
@@ -81,6 +67,7 @@
                         <Entry
                             x:Name="PasswordEntry"
                             Placeholder="Password"
+                            Text="{Binding Password}"
                             FontFamily="PoppinsRegular"
                             FontSize="14"
                             HeightRequest="40"
@@ -132,6 +119,7 @@
                 <!-- Sign Up Button -->
                 <Button 
                     Text="Sign Up"
+                    Command="{Binding SignUpNewCommand}"
                     BackgroundColor="#80b9b9"
                     TextColor="White"
                     FontFamily="PoppinsBold"
