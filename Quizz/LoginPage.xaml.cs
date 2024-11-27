@@ -1,8 +1,9 @@
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
+using Firebase.Database.Query;
 using Microsoft.Maui.Controls;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Quizz
@@ -40,7 +41,7 @@ namespace Quizz
         {
             InitializeComponent();
 
-            // Inicializar cliente FirebaseAuth
+            // Initialize FirebaseAuth Client
             _client = new FirebaseAuthClient(new FirebaseAuthConfig
             {
                 AuthDomain = "quizz-game-4c3d5.firebaseapp.com",
@@ -58,16 +59,33 @@ namespace Quizz
         {
             try
             {
-                
-                await _client.SignInWithEmailAndPasswordAsync(Email, Password);
+               
+                var userCredential = await _client.SignInWithEmailAndPasswordAsync(Email, Password);
 
-                await Shell.Current.GoToAsync("//HomePage");
+               
+                var userId = userCredential.User.Uid;
+                var username = await FetchUsernameFromDatabase(userId);
+
+                // Navigate to HomePage with Email and Username
+                await Shell.Current.GoToAsync($"//HomePage?email={Email}&username={username}");
             }
             catch (Exception ex)
             {
-                
                 await DisplayAlert("Login Failed", $"Error: {ex.Message}", "OK");
             }
+        }
+
+        private async Task<string> FetchUsernameFromDatabase(string userId)
+        {
+            // Replace this with Firebase Database client initialization
+            var dbClient = new Firebase.Database.FirebaseClient("https://quizz-game-4c3d5-default-rtdb.europe-west1.firebasedatabase.app");
+
+            var user = await dbClient
+                .Child("users")
+                .Child(userId)
+                .OnceSingleAsync<dynamic>();
+
+            return user?.Username ?? "Unknown User";
         }
 
         private async void OnSignUpClicked()

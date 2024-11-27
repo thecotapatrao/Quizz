@@ -1,6 +1,8 @@
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
+using Firebase.Database;
+using Firebase.Database.Query;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -12,7 +14,8 @@ namespace Quizz
         private string email;
         private string password;
         private string username;
-        private readonly FirebaseAuthClient _client;
+        private readonly FirebaseAuthClient _authClient;
+        private readonly FirebaseClient _dbClient;
 
         // Properties with Bindable implementation
         public string Email
@@ -42,14 +45,17 @@ namespace Quizz
         {
             InitializeComponent();
 
-            // Firebase client initialization
-            var config = new FirebaseAuthConfig
+            // Firebase Auth client initialization
+            var authConfig = new FirebaseAuthConfig
             {
                 ApiKey = "AIzaSyC0F2002TUyh3mkMgLXB5RKuri5aNGSlXA",
                 AuthDomain = "quizz-game-4c3d5.firebaseapp.com",
                 Providers = new[] { new EmailProvider() }
             };
-            _client = new FirebaseAuthClient(config);
+            _authClient = new FirebaseAuthClient(authConfig);
+
+            // Firebase Database client initialization
+            _dbClient = new FirebaseClient("https://quizz-game-4c3d5-default-rtdb.europe-west1.firebasedatabase.app");
 
             // Initialize commands
             TogglePasswordVisibilityCommand = new Command(() => ToggleVisibility(PasswordEntry, PasswordEyeIcon));
@@ -68,13 +74,36 @@ namespace Quizz
         {
             try
             {
-                var result = await _client.CreateUserWithEmailAndPasswordAsync(Email, Password, Username);
+                // Create user in Firebase Auth
+                var result = await _authClient.CreateUserWithEmailAndPasswordAsync(Email, Password, Username);
+
+                // Save username to Firebase Realtime Database
+                await SaveUsernameToDatabase(result.User.Uid);
+
                 await Shell.Current.GoToAsync("//LoginPage");
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error", $"Failed to sign up: {ex.Message}", "OK");
             }
+        }
+
+        private async Task SaveUsernameToDatabase(string userId)
+        {
+            await _dbClient
+                .Child("users")
+                .Child(userId)
+                .PutAsync(new { Username });
+        }
+
+        public async Task<string> FetchUsernameFromDatabase(string userId)
+        {
+            var user = await _dbClient
+                .Child("users")
+                .Child(userId)
+                .OnceSingleAsync<dynamic>();
+
+            return user.Username;
         }
 
         private void ToggleVisibility(Entry entry, Image icon)

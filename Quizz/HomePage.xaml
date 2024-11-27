@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Quizz.HomePage"
+                Shell.NavBarIsVisible="False"
              BackgroundColor="#f4f4f4">
 
     <!-- Barra de Navegação -->
@@ -14,9 +15,9 @@
 
         <!-- Título -->
         <Label 
-            Text="Bem-vindo à HomePage!"
+            Text="{Binding WelcomeMessage}"
             FontFamily="PoppinsBold"
-            FontSize="30"
+            FontSize="25"
             HorizontalOptions="Center"
             VerticalOptions="CenterAndExpand"
             TextColor="#333333" />
@@ -32,7 +33,7 @@
         <!-- Botões -->
         <StackLayout Grid.Row="2" Spacing="15" HorizontalOptions="Center">
             <Button 
-                Text="Iniciar Quiz"
+                Text="Jogar"
                 BackgroundColor="#80b9b9"
                 TextColor="White"
                 FontFamily="PoppinsBold"
